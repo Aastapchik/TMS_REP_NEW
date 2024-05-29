@@ -1,0 +1,32 @@
+--CREATE A TABLE
+create table person (
+	ID SERIAL UNIQUE,
+	NAME CHARACTER VARYING(30),
+	SURNAME CHARACTER VARYING(30),
+	AGE INTEGER,
+	PASSWORD_NUMBER INTEGER UNIQUE
+);
+
+
+--INSERT DATA
+
+INSERT INTO person (id, name, surname, age, password_number)
+VALUES
+	(1, 'Artyom', 'Astapchik', 22, 123456),
+	(2, 'Anton', 'surname1', 18, 65247),
+	(3, 'Marina', 'surname2', 63, 12216),
+	(4, 'John', 'surname3', 24, 12512),
+	(5, 'Dima', 'surname4', 84, 124256)
+
+
+--UPDATE DATA
+
+UPDATE person
+SET AGE = 58
+WHERE NAME = 'user';
+
+
+--DELETE DATA
+
+DELETE FROM person 
+WHERE age > 50
