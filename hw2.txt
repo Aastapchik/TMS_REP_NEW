@@ -1,0 +1,60 @@
+-ADD DATA
+
+INSERT INTO employees VALUES
+(1, 'employee1Name', 'employee1Surname', 'employee1@gmail.com', '111.111.111', '01/02/03', 4523, 0.54, 50),
+(2, 'employee2Namea', 'employee2Surname', 'employee2@gmail.com', '222.222.222', '01/03/05', 3999, 0, 80),
+(3, 'employee3Name', 'employee3Surname', 'employee3@gmail.com', '333.333.333', '01/11/10', 8542, 0, 50),
+(4, 'employee4Name', 'employee4Surname', 'employee4@gmail.com', '444.444.444', '01/03/03', 8000, 0.5, 50),
+(5, 'employee5Name', 'employee5Surname', 'employee5@gmail.com', '555.555.555', '01/07/03', 4136, 0.41, 80),
+(6, 'employee6Name', 'employee6Surname', 'employee6@gmail.com', '666.666.666', '01/05/03', 2741, 0, 80),
+(7, 'employee7Namea', 'employee7Surname', 'employee7@gmail.com', '777.777.777', '01/02/08', 9000, 0, 50),
+(8, 'employee8Name', 'employee8Surname', 'employee8@gmail.com', '888.888.888', '02/02/09', 8671, 0.57, 50),
+(9, 'employee9Name', 'employee9Surname', 'employee9@gmail.com', '999.999.999', '07/08/15', 10514, 0, 50),
+(10, 'employee10Namea', 'employee10Surname', 'employee10@gmail.com', '101010.101010.101010', '01/02/03', 4812, 0.74, 80)
+
+
+
+--DEPARTMENT_ID = 50 && SALARY > 4000
+
+SELECT * FROM EMPLOYEES
+WHERE department_id = 50 AND salary > 4000
+
+
+
+--LAST LETTER IS 'A'
+
+SELECT * FROM EMPLOYEES
+WHERE first_name like '%a'
+
+
+--(DEPARTMENT_ID = 50 || DEPARTMENT_ID = 80) && COMMISION_PCT > 0
+
+SELECT * FROM EMPLOYEES
+WHERE (department_id = 50 OR department_id = 80) AND commission_pct > 0
+
+
+
+--SALARY >= 8000 && SALARY <= 9000
+
+SELECT * FROM EMPLOYEES
+WHERE salary >= 8000 AND salary <= 9000
+
+
+
+--REPLACE . TO -
+
+UPDATE EMPLOYEES
+SET phone_number = replace(phone_number, '.', '-');
+SELECT * FROM EMPLOYEES
+
+
+--THE SAME SALARY
+
+SELECT department_id, salary, COUNT(*) FROM EMPLOYEES 
+GROUP BY department_id, salary
+
+
+--MAX NAME
+
+
+SELECT MAX(first_name) FROM EMPLOYEES
