@@ -30,7 +30,7 @@ WHERE first_name like '%a'
 --(DEPARTMENT_ID = 50 || DEPARTMENT_ID = 80) && COMMISION_PCT > 0
 
 SELECT * FROM EMPLOYEES
-WHERE (department_id = 50 OR department_id = 80) AND commission_pct > 0
+WHERE (department_id = 50 OR department_id = 80) AND commission_pct IS NOT NULL
 
 
 
