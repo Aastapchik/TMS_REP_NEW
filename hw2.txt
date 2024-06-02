@@ -57,4 +57,4 @@ GROUP BY department_id, salary
 --MAX NAME
 
 
-SELECT * FROM EMPLOYEES ORDER BY FIRST_NAME LIMIT 1
+SELECT * FROM employees WHERE LENGTH(first_name) = (SELECT MAX(LENGTH(first_name)) FROM employees);
