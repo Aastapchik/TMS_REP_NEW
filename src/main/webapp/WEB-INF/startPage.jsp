@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="get" method="get" class="form-example">
+<form action="get" method="post" class="form-example">
     <div class="form-example">
         <label for="id">Enter ID of employee to show it: </label>
         <input type="text" name="id" id="id"/>
@@ -18,9 +18,6 @@
 <hr>
 <form action="create" method="post" class="form-example">
     <div class="form-example">
-        <label for="id_c">Enter ID of employee: </label>
-        <input type="text" name="id_c" id="id_c"/>
-        <br>
         <label for="first_name">Enter First Name of employee:</label>
         <input type="text" name="first_name" id="first_name"/>
         <br>
@@ -51,7 +48,7 @@
     </div>
 </form>
 <hr>
-<form action="change-login" method="get" class="form-example">
+<form action="change-login" method="post" class="form-example">
     <div class="form-example">
         <label for="id_cl">Enter ID of employee to change login it: </label>
         <input type="text" name="id" id="id_cl"/>
@@ -65,7 +62,7 @@
 
 
 <hr>
-<form action="delete" method="get" class="form-example">
+<form action="delete" method="post" class="form-example">
     <div class="form-example">
         <label for="id_d">Enter ID of employee to delete it: </label>
         <input type="text" name="id" id="id_d"/>
