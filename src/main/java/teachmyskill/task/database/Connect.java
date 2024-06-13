@@ -1,31 +1,37 @@
 package teachmyskill.task.database;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static java.sql.DriverManager.getConnection;
-
 public class Connect {
+    private static Connect instance;
+    private static final String dbDriver = "org.postgresql.Driver";
+    private static final String URL = "jdbc:postgresql://localhost:5432/Employees";
+    private static final String USERNAME = "postgres";
+    private static final String PASSWORD = "admin";
 
-    public static Connection getConnect() {
-
-        Driver driver = new org.postgresql.Driver();
+    private Connect() {
         try {
-            DriverManager.registerDriver(driver);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Class.forName(dbDriver);
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error loading database driver");
         }
-        String URL = "jdbc:postgresql://localhost:5432/Employees";
-        String LOGIN = "postgres";
-        String PASSWORD = "admin";
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return connection;
     }
-}
+
+    public static Connect getInstance() {
+        if (instance == null) {
+            synchronized (Connect.class) {
+                if (instance == null) {
+                    instance = new Connect();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public static Connection getConnect() throws SQLException {
+        getInstance();
+        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+    }
+    }
