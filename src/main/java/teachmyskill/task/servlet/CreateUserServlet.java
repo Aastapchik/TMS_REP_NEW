@@ -10,16 +10,27 @@ import java.io.IOException;
 import java.sql.*;
 
 import static teachmyskill.task.database.Connect.getConnect;
+
 @WebServlet("/create")
 public class CreateUserServlet extends HttpServlet {
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection connection = getConnect();
+        Connection connection = null;
+        ResultSet resultSet = null;
+        int ID = 0;
         try {
+            connection = getConnect();
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employees VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            preparedStatement.setInt(1, Integer.parseInt(req.getParameter("id_c")));
+            PreparedStatement maxID = connection.prepareStatement("SELECT MAX(EMPLOYEE_ID) FROM EMPLOYEES");
+
+            resultSet = maxID.executeQuery();
+
+            while (resultSet.next()) ID = resultSet.getInt("max");
+
+
+            preparedStatement.setInt(1, ID + 1);
             preparedStatement.setString(2, req.getParameter("first_name"));
             preparedStatement.setString(3, req.getParameter("last_name"));
             preparedStatement.setString(4, req.getParameter("email"));
@@ -29,11 +40,11 @@ public class CreateUserServlet extends HttpServlet {
             preparedStatement.setDouble(8, Double.parseDouble(req.getParameter("commission_pct")));
             preparedStatement.setInt(9, Integer.parseInt(req.getParameter("department_id")));
             preparedStatement.executeUpdate();
+            getServletContext().getRequestDispatcher("/WEB-INF/createUser.jsp").forward(req, resp);
             resp.getWriter().write("SUCCESSFUL UPDATE!");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            getServletContext().getRequestDispatcher("/WEB-INF/errorPage.jsp").forward(req, resp);
         }
-
 
     }
 }
