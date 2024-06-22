@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id = "task1" class = "tasks.Task" scope="prototype">
+            <property name="message" value="hello"/>
+    </bean>
+
+    <bean id = "task2" class = "tasks.Task" scope="prototype">
+        <property name="message" value="DONE TASK 2"/>
+    </bean>
+
+    <bean id = "taskWithList" class = "tasks.Task" scope="prototype">
+        <property name="message" value="taskWithList"/>
+        <property name="listSubtask">
+            <list>
+                <bean class="tasks.Subtask">
+                    <property name="message" value="sub1"/></bean>
+
+                <bean class="tasks.Subtask">
+                    <property name="message" value="sub2"/></bean>
+
+                <bean class="tasks.Subtask">
+                    <property name="message" value="sub3"/></bean>
+            </list>
+        </property>
+    </bean>
+</beans>
