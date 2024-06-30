@@ -27,4 +27,9 @@
             </list>
         </property>
     </bean>
+
+       <bean id = "task3" class="tasks.Subtask" scope="prototype">
+        <property name="message" value="Hello World"/>
+    </bean>
+       
 </beans>
