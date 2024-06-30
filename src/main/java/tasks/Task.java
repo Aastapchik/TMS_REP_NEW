@@ -9,7 +9,7 @@ public class Task {
 
     public void getMessage() {
         System.out.println(message);
-        if(listSubtask != null) {
+        if (listSubtask != null) {
             for (Subtask st : listSubtask) st.getMessage();
         }
     }
