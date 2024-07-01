@@ -26,7 +26,7 @@ public class DeleteUserServlet extends HttpServlet {
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM EMPLOYEES WHERE EMPLOYEE_ID = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
-            resp.getWriter().write("SUCCESSFUL DELETE!");
+    
             req.setAttribute("name", id);
             getServletContext().getRequestDispatcher("/WEB-INF/deleteUser.jsp").forward(req,resp);
         } catch (Exception e) {
