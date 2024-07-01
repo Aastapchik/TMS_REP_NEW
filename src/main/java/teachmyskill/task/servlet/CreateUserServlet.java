@@ -41,7 +41,7 @@ public class CreateUserServlet extends HttpServlet {
             preparedStatement.setInt(9, Integer.parseInt(req.getParameter("department_id")));
             preparedStatement.executeUpdate();
             getServletContext().getRequestDispatcher("/WEB-INF/createUser.jsp").forward(req, resp);
-            resp.getWriter().write("SUCCESSFUL UPDATE!");
+    
         } catch (Exception e) {
             getServletContext().getRequestDispatcher("/WEB-INF/errorPage.jsp").forward(req, resp);
         }
