@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Пользователь успешно создан</title>
+    <title></title>
 </head>
 <body>
-
+Пользователь успешно создан
 </body>
 </html>
