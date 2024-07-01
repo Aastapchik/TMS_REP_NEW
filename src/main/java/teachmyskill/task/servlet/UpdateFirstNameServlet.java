@@ -28,7 +28,7 @@ public class UpdateFirstNameServlet extends HttpServlet {
             preparedStatement.setString(1, newFistName);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
-            resp.getWriter().write("SUCCESSFUL UPDATE FIRST NAME!!");
+
             getServletContext().getRequestDispatcher("/WEB-INF/updateUser.jps").forward(req, resp);
         } catch (Exception e) {
             getServletContext().getRequestDispatcher("/WEB-INF/errorPage.jsp").forward(req, resp);
