@@ -18,7 +18,6 @@ public class ActionUserController {
 
 
     @PostMapping("/create")
-
     public String creatingUser(CreateUser user, Model model) {
 
         Connection connection = null;
