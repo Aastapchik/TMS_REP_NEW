@@ -22,7 +22,7 @@ public class DeleteUserServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         Connection connection = null;
         try {
-            connection = getConnect();
+            connection = getInstanse().getConnect();
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM EMPLOYEES WHERE EMPLOYEE_ID = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
