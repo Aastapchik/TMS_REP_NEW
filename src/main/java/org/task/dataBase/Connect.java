@@ -31,7 +31,6 @@ public class Connect {
     }
 
     public static Connection getConnect() throws SQLException {
-        getInstance();
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }
-    }
+}

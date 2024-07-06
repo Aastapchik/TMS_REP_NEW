@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.task.DTO.CreateUser;
+import org.task.dataBase.Connect;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -17,6 +18,12 @@ import static org.task.dataBase.Connect.getConnect;
 public class ActionUserController {
 
 
+    @GetMapping("/create")
+    public String showingCreatingUserPage(){
+        return "createBT";
+    }
+
+
     @PostMapping("/create")
     public String creatingUser(CreateUser user, Model model) {
 
@@ -24,7 +31,7 @@ public class ActionUserController {
         ResultSet resultSet = null;
         int ID = 0;
         try {
-            connection = getConnect();
+            connection = Connect.getInstance().getConnect();
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employees VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             PreparedStatement maxID = connection.prepareStatement("SELECT MAX(EMPLOYEE_ID) FROM EMPLOYEES");
 
@@ -49,13 +56,20 @@ public class ActionUserController {
         }
     }
 
+
+    @GetMapping("/get")
+    public String showingGettingUserPage(){
+        return "getBT";
+    }
+
+
     @PostMapping("/get")
     public String gettingUser(@RequestParam(name = "id", required = false) int id, Model model) {
 
         Connection connection = null;
         ResultSet resultSet = null;
         try {
-            connection = getConnect();
+            connection = Connect.getInstance().getConnect();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID = ?");
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
@@ -76,13 +90,17 @@ public class ActionUserController {
         }
     }
 
+    @GetMapping("/delete")
+    public String showingDeletingUserPage(){
+        return "deleteBT";
+    }
 
     @PostMapping("/delete")
     public String deletingUser(@RequestParam(value = "id", required = false) int id, Model model) {
 
         Connection connection = null;
         try {
-            connection = getConnect();
+            connection = Connect.getInstance().getConnect();
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM EMPLOYEES WHERE EMPLOYEE_ID = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
@@ -93,13 +111,18 @@ public class ActionUserController {
         }
     }
 
+    @GetMapping("/change-login")
+    public String showingUpdatingUserPage(){
+        return "updateBT";
+    }
+
     @PostMapping("/change-login")
     public String updatingUser(@RequestParam(value = "id", required = false) int id, @RequestParam(value = "login", required = false) String name) {
 
         Connection connection = null;
 
         try {
-            connection = getConnect();
+            connection = Connect.getInstance().getConnect();
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE EMPLOYEES SET FIRST_NAME = ? WHERE EMPLOYEE_ID = ?");
             preparedStatement.setString(1, name);
             preparedStatement.setInt(2, id);
@@ -109,6 +132,5 @@ public class ActionUserController {
             return "errorPage";
         }
     }
-
 
 }
