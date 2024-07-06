@@ -26,7 +26,7 @@ public class ServletGetUser extends HttpServlet {
         Connection connection = null;
         ResultSet resultSet = null;
         try {
-            connection = getConnect();
+            connection = getInstanse().getConnect();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID = ?");
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
