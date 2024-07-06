@@ -23,7 +23,7 @@ public class UpdateFirstNameServlet extends HttpServlet {
         Connection connection = null;
 
         try {
-            connection = getConnect();
+            connection = getInstanse().getConnect();
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE EMPLOYEES SET FIRST_NAME = ? WHERE EMPLOYEE_ID = ?");
             preparedStatement.setString(1, newFistName);
             preparedStatement.setInt(2, id);
