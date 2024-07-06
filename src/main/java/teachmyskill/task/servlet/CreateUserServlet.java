@@ -21,7 +21,7 @@ public class CreateUserServlet extends HttpServlet {
         ResultSet resultSet = null;
         int ID = 0;
         try {
-            connection = getConnect();
+            connection = getInstanse().getConnect();
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employees VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             PreparedStatement maxID = connection.prepareStatement("SELECT MAX(EMPLOYEE_ID) FROM EMPLOYEES");
 
