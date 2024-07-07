@@ -7,6 +7,6 @@ public class StartPageController {
 
     @GetMapping("/")
     public String startingPage(){
-        return "startPage";
+        return "startingPage";
     }
 }
