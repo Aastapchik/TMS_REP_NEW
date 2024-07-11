@@ -1,5 +1,0 @@
-myApp\controller\StartPageController.class
-myApp\dataBase\Connect.class
-myApp\controller\ActionUserController.class
-myApp\DTO\CreateUser.class
-myApp\RunnerApp.class
