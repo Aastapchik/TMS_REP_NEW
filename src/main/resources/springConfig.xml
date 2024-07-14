@@ -4,32 +4,52 @@
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id = "task1" class = "tasks.Task" scope="prototype">
-            <property name="message" value="hello"/>
+    <bean id="task1" class="tasks.Task" scope="prototype">
+        <property name="message" value="hello"/>
     </bean>
 
-    <bean id = "task2" class = "tasks.Task" scope="prototype">
+    <bean id="task2" class="tasks.Task" scope="prototype">
         <property name="message" value="DONE TASK 2"/>
     </bean>
 
-    <bean id = "taskWithList" class = "tasks.Task" scope="prototype">
+    <bean id="taskWithList" class="tasks.Task" scope="prototype">
         <property name="message" value="taskWithList"/>
         <property name="listSubtask">
             <list>
                 <bean class="tasks.Subtask">
-                    <property name="message" value="sub1"/></bean>
+                    <property name="message" value="sub1"/>
+                </bean>
 
                 <bean class="tasks.Subtask">
-                    <property name="message" value="sub2"/></bean>
+                    <property name="message" value="sub2"/>
+                </bean>
 
                 <bean class="tasks.Subtask">
-                    <property name="message" value="sub3"/></bean>
+                    <property name="message" value="sub3"/>
+                </bean>
             </list>
         </property>
     </bean>
 
-       <bean id = "task3" class="tasks.Subtask" scope="prototype">
+    <bean id="task3" class="tasks.Subtask" scope="prototype">
         <property name="message" value="Hello World"/>
     </bean>
-       
+    <bean id="task4" class="tasks.Subtask" scope="prototype">
+        <property name="message" value="Hello World"/>
+    </bean>
+    <bean id="task5" class="tasks.Subtask" scope="prototype">
+        <property name="message" value="Hello World"/>
+    </bean>
+
+    <bean id="taskWithList2" class="tasks.Task" scope="prototype">
+        <property name="message" value="taskWithList"/>
+        <property name="listSubtask">
+            <list>
+                <ref bean="task3"/>
+                <ref bean="task4"/>
+                <ref bean="task5"/>
+            </list>
+        </property>
+    </bean>
+
 </beans>
