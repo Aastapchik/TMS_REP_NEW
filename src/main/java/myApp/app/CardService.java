@@ -16,7 +16,7 @@ public class CardService {
 
     public boolean getInfoAboutUser(Integer id, Account account) throws SQLException {
         if (id == null) return false;
-        getUserInfoByID(connection, id, account);
+        getUserInfoByID(id, account);
         return true;
     }
 
@@ -96,7 +96,7 @@ public class CardService {
         updateCard.executeUpdate();
     }
 
-    private void getUserInfoByID(Connection connection, Integer id, Account account) throws SQLException {
+    private void getUserInfoByID(Integer id, Account account) throws SQLException {
         User user = new User();
         PreparedStatement getUserInfo = connection.prepareStatement("SELECT firstnameuser, lastnameuser FROM myCards WHERE ID = ?");
         getUserInfo.setInt(1,id);
