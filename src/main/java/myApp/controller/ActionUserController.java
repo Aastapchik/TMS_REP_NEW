@@ -13,7 +13,7 @@ import myApp.DTO.CreateUser;
 
 @Controller
 @RequestMapping("/user")
-public class ActionUserController {
+public class UserController {
     private String page;
     public UserAction userAction;
 
