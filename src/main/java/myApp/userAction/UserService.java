@@ -2,21 +2,22 @@ package myApp.userAction;
 
 import myApp.DTO.CreateUser;
 import myApp.dataBase.Connect;
-import org.springframework.boot.Banner;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-@Component
-public class UserAction {
+@Service
+public class UserService {
 
+    @Autowired
+    private Connect connect;
     public boolean deletingUser(int id, Model model) {
-        Connection connection = null;
-        try {
-            connection = Connect.getInstance().getConnect();
+        try (Connection connection = connect.getConnect()) {
+
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM EMPLOYEES WHERE EMPLOYEE_ID = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
@@ -30,15 +31,12 @@ public class UserAction {
 
     public boolean creatingUser(CreateUser user) {
 
-        Connection connection = null;
-        ResultSet resultSet = null;
         int ID = 0;
-        try {
-            connection = Connect.getInstance().getConnect();
+        try(Connection connection = connect.getConnect()) {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employees VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             PreparedStatement maxID = connection.prepareStatement("SELECT MAX(EMPLOYEE_ID) FROM EMPLOYEES");
 
-            resultSet = maxID.executeQuery();
+            ResultSet resultSet = maxID.executeQuery();
 
             while (resultSet.next()) ID = resultSet.getInt("max");
 
@@ -61,9 +59,7 @@ public class UserAction {
 
 
     public boolean updatingUser(int id, String name) {
-        Connection connection = null;
-        try {
-            connection = Connect.getInstance().getConnect();
+        try(Connection connection = connect.getConnect()) {
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE EMPLOYEES SET FIRST_NAME = ? WHERE EMPLOYEE_ID = ?");
             preparedStatement.setString(1, name);
             preparedStatement.setInt(2, id);
@@ -76,10 +72,10 @@ public class UserAction {
 
     public boolean gettingUser(int id, Model model) {
 
-        Connection connection = null;
+
         ResultSet resultSet = null;
-        try {
-            connection = Connect.getInstance().getConnect();
+        try (Connection connection = connect.getConnect()){
+
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID = ?");
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();

@@ -1,7 +1,6 @@
 package myApp.controller;
 
-import myApp.userAction.UserAction;
-import org.springframework.beans.factory.annotation.Autowired;
+import myApp.userAction.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +14,10 @@ import myApp.DTO.CreateUser;
 @RequestMapping("/user")
 public class UserController {
     private String page;
-    public UserAction userAction;
+    public UserService userAction;
 
-    @Autowired
-    public ActionUserController(UserAction userAction) {
+    //    @Autowired
+    public ActionUserController(UserService userAction) {
         this.userAction = userAction;
     }
 
@@ -31,8 +30,10 @@ public class UserController {
 
     @PostMapping("/create")
     public String creatingUser(CreateUser user) {
-        if (userAction.creatingUser(user)) page = "createUser";
-        else page = "errorPage";
+        if (userAction.creatingUser(user))
+            page = "createUser";
+        else
+            page = "errorPage";
         return page;
     }
 
