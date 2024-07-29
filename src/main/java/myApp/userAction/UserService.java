@@ -5,6 +5,9 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import myApp.DTO.Workers;
 import myApp.dataBase.Connect;
+import net.n2oapp.criteria.api.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -18,6 +21,8 @@ public class UserService {
 
     @Autowired
     private EntityManagerFactory emf;
+    @Autowired
+    private SessionFactory sf;
 
     public boolean deletingUser(int id) {
         try {
@@ -41,6 +46,8 @@ public class UserService {
             EntityManager entityManager = emf.createEntityManager();
             EntityTransaction entityTransaction = entityManager.getTransaction();
             entityTransaction.begin();
+            int maxID = entityManager.createQuery("SELECT MAX(w.employeeId) FROM Workers w", Integer.class).getSingleResult();
+            user.setEmployeeId(maxID + 1);
             entityManager.merge(user);
             entityTransaction.commit();
             entityManager.close();
@@ -57,10 +64,11 @@ public class UserService {
         try {
 
             EntityManager entityManager = emf.createEntityManager();
-            Workers worker = entityManager.find(Workers.class, id);
+            //Workers worker = entityManager.find(Workers.class, id);
+            Workers workers1 = sf.openSession().get(Workers.class, id);
             EntityTransaction entityTransaction = entityManager.getTransaction();
             entityTransaction.begin();
-            worker.setFirstName(name);
+            workers1.setFirstName(name);
             entityTransaction.commit();
             return true;
         } catch (Exception e) {

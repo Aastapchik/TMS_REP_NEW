@@ -15,10 +15,10 @@
 <body>
 <p class = "header1">CREATE NEW EMPLOYEE</p>
 <form action="${pageContext.request.contextPath}/user/create" method="post" class="row g-3">
-    <div class="col-md-6">
-        <label for="inputID" class="form-label">ID</label>
-        <input type="text" class="form-control" name="EmployeeId" id="inputID">
-    </div>
+<%--    <div class="col-md-6">--%>
+<%--        <label for="inputID" class="form-label">ID</label>--%>
+<%--        <input type="text" class="form-control" name="EmployeeId" id="inputID">--%>
+<%--    </div>--%>
     <div class="col-md-6">
         <label for="inputFirstName" class="form-label">First Name</label>
         <input type="text" class="form-control" name="FirstName" id="inputFirstName">
